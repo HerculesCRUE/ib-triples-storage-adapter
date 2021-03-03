@@ -186,7 +186,7 @@ public class TrellisOperationsImpl implements TrellisOperations {
     @Override
     public void updateEntry(ManagementBusEvent message) {
     	WatchDog updateEntryWatchDog = new WatchDog();
-        String resourceID = triplesStorageUtils.toResourceId(message.getIdModel());
+        String resourceID = message.getIdModel().split("/")[message.getIdModel().split("/").length - 1];
         String urlContainer =  trellisUrlEndPoint.concat("/").concat(message.getClassName()).concat("/").concat(resourceID);
         
         Model model = triplesStorageUtils.toObject(message.getModel());        
@@ -219,7 +219,7 @@ public class TrellisOperationsImpl implements TrellisOperations {
     @Override
     public void deleteEntry(ManagementBusEvent message) {
     	WatchDog deleteEntryWatchDog = new WatchDog();
-        String resourceID = triplesStorageUtils.toResourceId(message.getIdModel());
+        String resourceID = message.getIdModel().split("/")[message.getIdModel().split("/").length - 1];
         String urlContainer =  trellisUrlEndPoint.concat("/").concat(message.getClassName()).concat("/").concat(resourceID);
         
         Response deleteResponse = trellisCommonOperations.createRequestSpecification().delete(urlContainer);
