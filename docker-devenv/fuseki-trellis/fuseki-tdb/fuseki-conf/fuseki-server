@@ -45,10 +45,9 @@ then
 
 JAR1="$FUSEKI_HOME/fuseki-server.jar"
 JAR2="$FUSEKI_HOME/jena-fuseki-server-*.jar"
-JAR3="$FUSEKI_HOME/jena-permissions-poc-1.0-SNAPSHOT.jar"
 JAR=""
 
-for J in "$JAR1" "$JAR2" "$JAR3"
+for J in "$JAR1" "$JAR2"
 do
     # Expand
     J="$(echo $J)"
@@ -103,9 +102,13 @@ then
    CP="${CP}:${FUSEKI_BASE}/extra/*" 
 fi
 
+CP="${CP}:/fuseki/jena-permissions-poc-1.0-SNAPSHOT.jar"
+
 JVM_ARGS=${JVM_ARGS:--Xmx1200M}
 
-exec $JAVA $JVM_ARGS -cp "$CP" org.apache.jena.fuseki.cmd.FusekiCmd "$@"
+echo $JAVA $JVM_ARGS -cp "$CP" org.apache.jena.fuseki.cmd.FusekiCmd --conf=/fuseki/config.ttl "$@"
+
+exec $JAVA $JVM_ARGS -cp "$CP" org.apache.jena.fuseki.cmd.FusekiCmd --conf=/fuseki/config.ttl "$@"
 
 ## Adding custom code to the Fuseki server:
 ##
