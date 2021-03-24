@@ -108,6 +108,8 @@ public class UrisFactoryClientImpl implements UrisFactoryClient {
 					.queryParam(typeId, id)
 					.queryParam(Constants.STORAGE_NAME, StorageType.TRELLIS.name().toLowerCase());
 
+			this.logger.info("[getUriByResource] Call url {}", builder.toUriString());
+			
 			Map response = restUrisTemplate.getForObject(builder.toUriString(), Map.class);
 			if (response != null) {
 				ArrayList urisMap = (ArrayList) response.get(Constants.LOCAL_URIS);
