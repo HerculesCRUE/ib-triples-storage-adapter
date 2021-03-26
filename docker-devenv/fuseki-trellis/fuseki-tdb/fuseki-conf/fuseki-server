@@ -17,6 +17,7 @@
 
 # Run fuseki as a standalone server
 # Determine where this script resides. Start by assuming it was the path invoked.
+
 THIS_SCRIPT="$0"
 
 # Handle resolving symlinks to this script on BSD or GNU systems by avoiding readlink.
