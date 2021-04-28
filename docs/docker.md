@@ -1,6 +1,6 @@
 # Generación de imagen Docker
 
-Los artefactos bootables están diseñados para poder ser distribuidos como imagen Docker. Se indicarán a continuación las intrucciones.
+Los artefactos bootables están diseñados para poder ser distribuidos como imagen Docker.A continuación, se indican las instrucciones.
 
 ## Compilación
 
@@ -8,7 +8,7 @@ En primer lugar es preciso [compilar el artefacto](build.md) y copiar el JAR gen
 
 ## Generación de la imagen
 
-Para la generación de la imagen se precisa ejecutar el siguiente comando desde el directorio `docker-build` que es donde se encuentra el fichero `Dockerfile`.
+Para generar la imagen, se precisa ejecutar el siguiente comando desde el directorio `docker-build`, que es donde se encuentra el fichero `Dockerfile`.
 
 ```bash
 docker build . -t {artifact-name}:{tag}

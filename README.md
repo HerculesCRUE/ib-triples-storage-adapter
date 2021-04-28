@@ -2,13 +2,14 @@
 
 | Entregable     | Librería de conexión con Triple Store                        |
 | -------------- | ------------------------------------------------------------ |
-| Fecha          | 16/12/2020                                                   |
+| Fecha          | 28/04/2021                                                   |
+| Revisado por   | Paloma Terán Pérez                                           |
 | Proyecto       | [ASIO](https://www.um.es/web/hercules/proyectos/asio) (Arquitectura Semántica e Infraestructura Ontológica) en el marco de la iniciativa [Hércules](https://www.um.es/web/hercules/) para la Semántica de Datos de Investigación de Universidades que forma parte de [CRUE-TIC](https://www.crue.org/proyecto/hercules/) |
 | Módulo         | Storage adapter                                              |
 | Tipo           | Software                                                     |
 | Objetivo       | Storage adapter para el almacenamiento de tripletas para el proyecto Backend SGI (ASIO). |
-| Estado         | **80%** El Storage Adapter guarda los datos en Trellis y Wikidata |
-| Próximos pasos | Mejorar test y funcionalidades.                              |
+| Estado         | **100%** El Storage Adapter está preparado para guardar los datos en Trellis y Wikidata |
+| Próximos pasos |                                                              |
 | Documentación  | [Manual de usuario](https://github.com/HerculesCRUE/ib-asio-docs-/blob/master/entregables_hito_1/12-An%C3%A1lisis/Manual%20de%20usuario/Manual%20de%20usuario.md)<br />[Manual de despliegue](https://github.com/HerculesCRUE/ib-asio-composeset/blob/master/README.md)<br />[Documentación técnica](https://github.com/HerculesCRUE/ib-asio-docs-/blob/master/entregables_hito_1/11-Arquitectura/ASIO_Izertis_Arquitectura.md) |
 
 # ASIO - Triples Storage Adapter
@@ -108,7 +109,7 @@ No es necesario especificar la clase de inicio de la aplicación, ya que el fich
 
 Se incluyen los resultados del testing y cobertura en los siguientes enlaces:
 
-- [Testing](http://herc-iz-front-desa.atica.um.es:8070/triples-storage-adapter/surefire/surefire-report.html)
+- [Testing](https://reports.herculesasioizertis.desa.um.es/triples-storage-adapter/surefire/surefire-report.html)
 - [Cobertura](https://sonarcloud.io/component_measures?id=HerculesCRUE_ib-triples-storage-adapter&metric=coverage&view=list)
 
 ## Documentación adicional
