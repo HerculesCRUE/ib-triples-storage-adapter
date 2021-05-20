@@ -1,5 +1,6 @@
 ---
 app:
+  domain: hercules.org
   # CORS
   cors:
     enabled: true

@@ -1,6 +1,6 @@
 # Compilación
 
-Se indicará a continuación los pasos que hay que seguir para llevar a cabo la generación del artefacto.
+A continuación, se indican los pasos que hay que seguir para llevar a cabo la generación del artefacto.
 
 ## Prerrequisitos
 
@@ -11,13 +11,13 @@ Se precisa disponer los siguientes elementos configurados:
 
 ## Compilación
 
-Para realizar la compilación se ejecutará el siguiente comando:
+El siguiente se ejecuta comando para realizar la compilación:
 
 ```bash
 mvn clean package
 ```
 
-También sería posible instalar o desplegar los artefactos sustituyendo `package` por `install` o `deploy` respectivamente.
+También es posible instalar o desplegar los artefactos sustituyendo `package` por `install` o `deploy` respectivamente.
 
 Los artefactos se generarán dentro del directorio `target` de cada uno de los módulos:
 

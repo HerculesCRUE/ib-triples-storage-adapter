@@ -1,0 +1,40 @@
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix tdb:     <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix perm:    <http://apache.org/jena/permissions/Assembler#> .
+@prefix my:     <http://example.org/#> .
+@prefix :        <#> .
+
+
+:trellisService a fuseki:Service ;
+    fuseki:name                        "trellis" ;
+    fuseki:serviceQuery                "sparql", "query" ;
+    fuseki:serviceUpdate               "update" ;
+    fuseki:serviceUpload               "upload" ;
+    fuseki:serviceReadWriteGraphStore  "data" ;
+    fuseki:serviceReadGraphStore       "get" ;
+    fuseki:dataset                     :dataset .
+
+:dataset a tdb:DatasetTDB ;
+    tdb:unionDefaultGraph true ;
+    ja:context [
+        ja:cxtName "arq:queryTimeout" ;
+        ja:cxtValue "300000" ] ; # 5 minutes timeout
+    tdb:location "/fuseki/databases/trellis" .
+
+##
+## Define the security evaluator.  This is where we use the example
+## ShiroExampleEvaluator.  For your production environment you will replace
+## "org.apache.jena.permissions.example.ShiroExampleEvaluator"  with your
+## SecurityEvaluator implementation.  Note that  ShiroExampleEvaluator constructor
+## takes a Model argument.  We pass in the unsecured baseModel so that the evaluator
+## can read it unencumbered.  Your implementation of SecurityEvaluator may have different
+## parameters to meet your specific needs.
+##
+my:secEvaluator rdf:type perm:Evaluator ;
+    perm:args [
+        rdf:_1 my:baseModel ;
+    ] ;
+    perm:evaluatorClass "es.um.asio.jena.SPARQLSecurityEvaluator" .

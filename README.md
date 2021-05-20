@@ -2,7 +2,8 @@
 
 | Entregable     | Librería de conexión con Triple Store                        |
 | -------------- | ------------------------------------------------------------ |
-| Fecha          | 16/12/2020                                                   |
+| Fecha          | 28/04/2021                                                   |
+| Revisado por   | Paloma Terán Pérez                                           |
 | Proyecto       | [ASIO](https://www.um.es/web/hercules/proyectos/asio) (Arquitectura Semántica e Infraestructura Ontológica) en el marco de la iniciativa [Hércules](https://www.um.es/web/hercules/) para la Semántica de Datos de Investigación de Universidades que forma parte de [CRUE-TIC](https://www.crue.org/proyecto/hercules/) |
 | Módulo         | Storage adapter                                              |
 | Tipo           | Software                                                     |
@@ -108,7 +109,7 @@ No es necesario especificar la clase de inicio de la aplicación, ya que el fich
 
 Se incluyen los resultados del testing y cobertura en los siguientes enlaces:
 
-- [Testing](http://herc-iz-front-desa.atica.um.es:8070/triples-storage-adapter/surefire/surefire-report.html)
+- [Testing](https://reports.herculesasioizertis.desa.um.es/triples-storage-adapter/surefire/surefire-report.html)
 - [Cobertura](https://sonarcloud.io/component_measures?id=HerculesCRUE_ib-triples-storage-adapter&metric=coverage&view=list)
 
 ## Documentación adicional

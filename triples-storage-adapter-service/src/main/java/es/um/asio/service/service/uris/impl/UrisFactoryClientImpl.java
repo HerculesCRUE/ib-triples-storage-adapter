@@ -42,6 +42,9 @@ public class UrisFactoryClientImpl implements UrisFactoryClient {
 	/** The uri factory endpoint. */
 	@Value("${app.generator-uris.endpoint-link-uri}")
 	private String uriFactoryEndpoint;
+	
+	@Value("${app.domain}")
+	private String domain;
 
 	/** Rest Template. */
 	@Autowired
@@ -98,13 +101,15 @@ public class UrisFactoryClientImpl implements UrisFactoryClient {
 		String result = StringUtils.EMPTY;
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(localResourceStorageUri)
-					.queryParam(Constants.DOMAIN, Constants.DOMAIN_VALUE)
+					.queryParam(Constants.DOMAIN, StringUtils.isNotBlank(this.domain) ? this.domain : Constants.DOMAIN_VALUE)
 					.queryParam(Constants.SUBDOMAIN, Constants.SUBDOMAIN_VALUE)
 					.queryParam(Constants.LANG, Constants.SPANISH_LANGUAGE)
 					.queryParam(Constants.TYPE_CODE, Constants.TYPE_REST).queryParam("entity", className)
 					.queryParam(typeId, id)
 					.queryParam(Constants.STORAGE_NAME, StorageType.TRELLIS.name().toLowerCase());
 
+			this.logger.info("[getUriByResource] Call url {}", builder.toUriString());
+			
 			Map response = restUrisTemplate.getForObject(builder.toUriString(), Map.class);
 			if (response != null) {
 				ArrayList urisMap = (ArrayList) response.get(Constants.LOCAL_URIS);
@@ -138,7 +143,7 @@ public class UrisFactoryClientImpl implements UrisFactoryClient {
 		if (cachedResult == null) {
 			try {
 				UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uriProperty)
-						.queryParam(Constants.DOMAIN, Constants.DOMAIN_VALUE)
+						.queryParam(Constants.DOMAIN, StringUtils.isNotBlank(this.domain) ? this.domain : Constants.DOMAIN_VALUE)
 						.queryParam(Constants.SUBDOMAIN, Constants.SUBDOMAIN_VALUE)
 						.queryParam(Constants.LANG, Constants.SPANISH_LANGUAGE);
 

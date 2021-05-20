@@ -6,16 +6,17 @@ services:
     container_name: fuseki-sandbox
     restart: always
     environment:
-      - ADMIN_PASSWORD=pw123
+      - ADMIN_PASSWORD=pw123 
     ports:
       - "3030:3030"
     volumes:
       - fuseki-data-sandbox:/fuseki/databases/trellis
       - fuseki-backup-sandbox:/fuseki/databases/backups
-      #- ./fuseki-conf/config.ttl:/fuseki/config.ttl
-      #- ./fuseki-conf/trellis.ttl:/fuseki/trellis.ttl
-      #- ./fuseki-conf/shiro.ini:/fuseki/shiro.ttl
-      #- ./fuseki-conf/log4j.properties:/fuseki/log4j.properties
+#      - ./fuseki-conf/config.ttl:/fuseki/config.ttl
+#      - ./fuseki-conf/jena-permissions-poc-1.0-SNAPSHOT.jar:/fuseki/jena-permissions-poc-1.0-SNAPSHOT.jar
+#      - ./fuseki-conf/trellis.ttl:/fuseki/trellis.ttl
+#      - ./fuseki-conf/shiro.ini:/fuseki/shiro.ini
+#      - ./fuseki-conf/log4j.properties:/fuseki/log4j.properties
     networks:
       - sandbox-net
   trellis:
