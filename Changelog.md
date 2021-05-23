@@ -2,6 +2,7 @@
 
 ## 2.0-SNAPSHOT (19/05/2021)
 
+- Git build actions
 - Configuración de seguridad para Fuseki
 
 
