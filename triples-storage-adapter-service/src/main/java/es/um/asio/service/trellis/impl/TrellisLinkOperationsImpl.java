@@ -116,7 +116,7 @@ public class TrellisLinkOperationsImpl implements TrellisLinkOperations {
         } else {
         	
         	// we call the discovery library in order to notify the updating
-        	// this.discoveryClient.eventNotifyDiscovery(Operation.UPDATE, className, localUri, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+        	this.discoveryClient.eventNotifyDiscovery(Operation.UPDATE, className, localUri, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
         	
             logger.info("GRAYLOG-TS Actualizado recurso en trellis de tipo: {}", localUri);
         }        
