@@ -234,7 +234,8 @@ public class TrellisOperationsImpl implements TrellisOperations {
     public void deleteEntry(ManagementBusEvent message) {
     	WatchDog deleteEntryWatchDog = new WatchDog();
         String resourceID = message.getIdModel().split("/")[message.getIdModel().split("/").length - 1];
-        String urlContainer =  trellisUrlEndPoint.concat("/").concat(message.getClassName()).concat("/").concat(resourceID);
+        String classChunk = message.getIdModel().split("/")[message.getIdModel().split("/").length - 2];
+        String urlContainer =  trellisUrlEndPoint.concat("/").concat(classChunk).concat("/").concat(resourceID);
         
         Response deleteResponse = trellisCommonOperations.createRequestSpecification().delete(urlContainer);
        
