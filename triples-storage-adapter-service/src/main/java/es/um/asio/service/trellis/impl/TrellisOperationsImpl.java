@@ -238,9 +238,9 @@ public class TrellisOperationsImpl implements TrellisOperations {
         String urlContainer =  trellisUrlEndPoint.concat("/").concat(classChunk).concat("/").concat(resourceID);
         logger.info("Request for Delete object with URL {}",urlContainer);
         Response deleteResponse = trellisCommonOperations.createRequestSpecification().delete(urlContainer);
-       
+
         if (deleteResponse.getStatusCode() != HttpStatus.SC_OK && deleteResponse.getStatusCode() != HttpStatus.SC_NO_CONTENT) {
-            logger.error("Error deleting the object: {} - {}", message.getClassName(), message.getIdModel());
+            logger.error("Error deleting the object: {} - {}", classChunk, message.getIdModel());
             logger.error("Operation: {}", message.getOperation());
             logger.error("cause: {}", deleteResponse.getBody().asString());
             throw new RuntimeTrellisException("Error deleting in Trellis the object: ".concat(message.getClassName()).concat(" - ").concat(message.getIdModel()));
