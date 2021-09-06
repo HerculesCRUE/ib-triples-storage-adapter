@@ -234,13 +234,13 @@ public class TrellisOperationsImpl implements TrellisOperations {
     public void deleteEntry(ManagementBusEvent message) {
     	WatchDog deleteEntryWatchDog = new WatchDog();
         String resourceID = message.getIdModel().split("/")[message.getIdModel().split("/").length - 1];
-        String classChunk = message.getIdModel().split("/")[message.getIdModel().split("/").length - 2];
+        String classChunk = message.getClassName();
         String urlContainer =  trellisUrlEndPoint.concat("/").concat(classChunk).concat("/").concat(resourceID);
         logger.info("Request for Delete object with URL {}",urlContainer);
         Response deleteResponse = trellisCommonOperations.createRequestSpecification().delete(urlContainer);
 
         if (deleteResponse.getStatusCode() != HttpStatus.SC_OK && deleteResponse.getStatusCode() != HttpStatus.SC_NO_CONTENT) {
-            logger.error("Error deleting the object: {} - {}", classChunk, message.getIdModel());
+            logger.error("Error deleting the object: {} - {}", message.getClassName(), message.getIdModel());
             logger.error("Operation: {}", message.getOperation());
             logger.error("cause: {}", deleteResponse.getBody().asString());
             throw new RuntimeTrellisException("Error deleting in Trellis the object: ".concat(message.getClassName()).concat(" - ").concat(message.getIdModel()));
