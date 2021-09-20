@@ -18,7 +18,7 @@
 	<properties>
 		<asio-abstractions.version>1.0-SNAPSHOT</asio-abstractions.version>
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
-		<jena.version>3.14.0</jena.version>
+		<jena.version>4.2.0</jena.version>
 		<trellis-api.version>0.8.3</trellis-api.version>
 		<rest-assured.version>2.3.3</rest-assured.version>
 		<wdtk-wikibaseapi.version>0.11.0</wdtk-wikibaseapi.version>
