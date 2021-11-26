@@ -243,6 +243,14 @@ public class TrellisOperationsImpl implements TrellisOperations {
             logger.error("Error deleting the object: {} - {}", message.getClassName(), message.getIdModel());
             logger.error("Operation: {}", message.getOperation());
             logger.error("cause: {}", deleteResponse.getBody().asString());
+            try {
+                // we call the discovery library in order to notify the insertion
+                this.discoveryClient.eventNotifyDiscovery(Operation.DELETE, message.getClassName(), urlContainer, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+                logger.info("Notified {} in class: {} localURI: {} to discovery lib",Operation.DELETE,message.getClassName(),urlContainer);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("Error in comunicate with discovery lib");
+            }
             throw new RuntimeTrellisException("Error deleting in Trellis the object: ".concat(message.getClassName()).concat(" - ").concat(message.getIdModel()));
         } else {
             logger.info("GRAYLOG-TS Eliminado recurso en trellis de tipo: {}", message.getClassName());
