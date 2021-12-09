@@ -13,4 +13,4 @@ management:
     redis:
       enabled: false
   server:
-    port: 9324
+    port: 19324

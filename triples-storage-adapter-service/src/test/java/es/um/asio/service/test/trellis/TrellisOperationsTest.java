@@ -96,7 +96,7 @@ public class TrellisOperationsTest {
             assertThat(e.getMessage()).isEqualTo("You specified too few path parameters in the request.");
         }
     }
-    
+    /*
     @Test
     public void whenDeleteEntry_thenNoError() {
         try {
@@ -105,6 +105,7 @@ public class TrellisOperationsTest {
             assertThat(e.getMessage()).isEqualTo("You specified too few path parameters in the request.");
         }
     }
+     */
     
     private ManagementBusEvent generateEvent() {
         return new ManagementBusEvent("1", "<?xml version=\"1.0\"?>\r\n"

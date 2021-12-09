@@ -149,9 +149,7 @@ public class TrellisOperationsImpl implements TrellisOperations {
         // we call to uri factory to notify the insertion
         logger.info("FactoryUriNotification: canonicalUri {}, localUri {}", message.getIdModel(), localTripleStorageUri);
         this.urisFactoryClient.eventNotifyUrisFactory(message.getIdModel(), localTripleStorageUri, Constants.TRELLIS);
-        
-        // we call the discovery library in order to notify the insertion
-        // this.discoveryClient.eventNotifyDiscovery(Operation.INSERT, message.getClassName(), localTripleStorageUri, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+
         
         Response postResponse = trellisCommonOperations.createRequestSpecification()
                 .contentType(MediaTypes.TEXT_TURTLE)
@@ -168,6 +166,14 @@ public class TrellisOperationsImpl implements TrellisOperations {
             
         } else {
             logger.info("GRAYLOG-TS Creado recurso en trellis de tipo: {}", message.getClassName());
+            // we call the discovery library in order to notify the insertion
+            try {
+                this.discoveryClient.eventNotifyDiscovery(Operation.INSERT, message.getClassName(), localTripleStorageUri, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+                logger.info("Notified {} in class: {} localURI: {} to discovery lib",Operation.INSERT,message.getClassName(),localTripleStorageUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("Error in comunicate with discovery lib");
+            }
         }
         
         createEntryWatchDog.takeTime("createEntry");
@@ -201,6 +207,14 @@ public class TrellisOperationsImpl implements TrellisOperations {
             throw new RuntimeTrellisException("Error updating in Trellis the object: ".concat(message.getModel()));
         } else {
             logger.info("GRAYLOG-TS Actualizado recurso en trellis de tipo: {}",message.getClassName());
+            try {
+                // we call the discovery library in order to notify the insertion
+                this.discoveryClient.eventNotifyDiscovery(Operation.UPDATE, message.getClassName(), urlContainer, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+                logger.info("Notified {} in class: {} localURI: {} to discovery lib",Operation.UPDATE,message.getClassName(),urlContainer);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("Error in comunicate with discovery lib");
+            }
         }
         
         updateEntryWatchDog.takeTime("updateEntry");
@@ -220,17 +234,34 @@ public class TrellisOperationsImpl implements TrellisOperations {
     public void deleteEntry(ManagementBusEvent message) {
     	WatchDog deleteEntryWatchDog = new WatchDog();
         String resourceID = message.getIdModel().split("/")[message.getIdModel().split("/").length - 1];
-        String urlContainer =  trellisUrlEndPoint.concat("/").concat(message.getClassName()).concat("/").concat(resourceID);
-        
+        String classChunk = message.getClassName();
+        String urlContainer =  trellisUrlEndPoint.concat("/").concat(classChunk).concat("/").concat(resourceID);
+        logger.info("Request for Delete object with URL {}",urlContainer);
         Response deleteResponse = trellisCommonOperations.createRequestSpecification().delete(urlContainer);
-       
+
         if (deleteResponse.getStatusCode() != HttpStatus.SC_OK && deleteResponse.getStatusCode() != HttpStatus.SC_NO_CONTENT) {
             logger.error("Error deleting the object: {} - {}", message.getClassName(), message.getIdModel());
             logger.error("Operation: {}", message.getOperation());
             logger.error("cause: {}", deleteResponse.getBody().asString());
+            try {
+                // we call the discovery library in order to notify the insertion
+                this.discoveryClient.eventNotifyDiscovery(Operation.DELETE, message.getClassName(), urlContainer, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+                logger.info("Notified {} in class: {} localURI: {} to discovery lib",Operation.DELETE,message.getClassName(),urlContainer);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("Error in comunicate with discovery lib");
+            }
             throw new RuntimeTrellisException("Error deleting in Trellis the object: ".concat(message.getClassName()).concat(" - ").concat(message.getIdModel()));
         } else {
             logger.info("GRAYLOG-TS Eliminado recurso en trellis de tipo: {}", message.getClassName());
+            try {
+                // we call the discovery library in order to notify the insertion
+                this.discoveryClient.eventNotifyDiscovery(Operation.DELETE, message.getClassName(), urlContainer, Constants.SUBDOMAIN_VALUE, Constants.TRELLIS);
+                logger.info("Notified {} in class: {} localURI: {} to discovery lib",Operation.DELETE,message.getClassName(),urlContainer);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("Error in comunicate with discovery lib");
+            }
         }
         
         deleteEntryWatchDog.takeTime("deleteEntry");
